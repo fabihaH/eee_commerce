@@ -4,8 +4,9 @@ gem 'rails', '3.2.18'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'mysql2', '~> 0.3.10'
+group :development do
+  gem 'mysql2', '~> 0.3.10'
+end
 
 
 # Gems used only for assets and not required
@@ -22,6 +23,7 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+gem 'paperclip'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
