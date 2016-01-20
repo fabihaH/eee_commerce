@@ -4,8 +4,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
-
+    #@products = Product.all
+    if params[:search]
+      @products = Product.search params[:search]
+    else
+      @products = Product.all
+  end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
@@ -22,12 +26,12 @@ class ProductsController < ApplicationController
       format.json { render json: @product }
     end
   end
-
+  
   # GET /products/new
   # GET /products/new.json
   def new
     @product = Product.new
-
+    @product.attachments.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
@@ -43,6 +47,9 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
+
+    @tags = Tag.where(:id => params[:tag])
+    @product.tags << @tags
 
     respond_to do |format|
       if @product.save

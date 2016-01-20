@@ -4,7 +4,15 @@
   <b>Name:</b>
   <%= @product.name %>
 </p>
-
+<p>
+  <%= image_tag @product.attachments.first.photo.url(:medium) if @product.attachments.present? %>
+</p>
+    <p>
+      <span><b> Tag: </b></span>
+      <% @product.tags.each do |tag| %>
+        <%= tag.name %>
+      <% end %>
+    </p>
 <p>
   <b>Price:</b>
   <%= @product.price %>
@@ -19,7 +27,7 @@
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
 <%= render "comments/new_comment_form" %>
-
+<div id ="comments">
 <% @comments.each do |comment| %>
   <p>
     <span> <%= comment.created_at %> </span>
@@ -28,5 +36,6 @@
     <span><b> Comment: </b></span>
     <%= comment.comment %>
   </p>
+</div>
 <% end %>
 

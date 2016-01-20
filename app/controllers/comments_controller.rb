@@ -23,9 +23,15 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @product.comments.new(params[:comment])
-    @comment.save
-    redirect_to @comment.commentable_id
+    respond_to do |format|
+    if @comment.save
+      format.html { redirect_to @product }
+      format.js
+    else
+      format.html { render action "new"}
+    end
   end
+end
 
   def update
     @comment.update_attributes(params[:comment])
