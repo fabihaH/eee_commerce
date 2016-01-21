@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   has_many :attachments, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :attachments
   has_and_belongs_to_many :tags
-  
+  belongs_to :user
   define_index do
     indexes name
   end
